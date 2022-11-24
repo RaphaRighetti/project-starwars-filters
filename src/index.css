@@ -56,6 +56,7 @@ header {
 .main-content {
   width: 95%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
@@ -67,19 +68,19 @@ header {
 .table-container {
   overflow-x: auto;
   overflow-y: auto;
-  max-height: 200px;
+  max-height: 250px;
 }
 
 table {
   text-align: center;
-  font-size: 14px;
-  padding-bottom: 20px;
+  font-size: 12px;
+  padding-bottom: 10px;
 }
 
 tr th {
   background-color: rgb(46, 48, 53, 0.8);
   padding: 10px;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: capitalize;
 }
 
@@ -109,4 +110,153 @@ tr td {
   background-color: black;
   border-radius: 100px;
   border: 1px solid rgba(250, 230, 10, 0.5);
+}
+
+.filters-container {
+  padding-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+:focus {
+  outline: none;
+}
+
+.effect-2 {
+  border: 0; 
+  padding: 7px 25px 7px 5px;
+  border-bottom: 1px solid rgb(145, 145, 145);
+  width: calc(100% - 30px);
+  background-color: transparent;
+  color: white;
+}
+
+.effect-2 ~ .focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--yellow);
+  transition: 0.4s;
+}
+
+.effect-2:focus ~ .focus-border {
+  width: 100%;
+  transition: 0.4s;
+  left: 0;
+}
+
+.input-box {
+  position: relative;
+  width: fit-content;
+  width: 50%;
+  max-width: 250px;
+  min-width: 100px;
+}
+
+.lupa {
+  position: absolute;
+  width: 15px;
+  bottom: 4px;
+  right: 4px;
+  align-self: flex-end;
+}
+
+.label-input-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.number-order-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.number-filter-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+#num-filter {
+  padding: 5px;
+  width: calc(100% - 10px);
+}
+
+.input-num-box {
+  position: relative;
+  align-self: flex-end;
+  width: fit-content;
+  width: 50%;
+  max-width: 100px;
+  min-width: 50px;
+}
+
+.select-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: rgb(145, 145, 145);
+  gap: 4px;
+}
+
+.select-column {
+  border: 1px solid transparent;
+  border-bottom-color: rgb(145, 145, 145);
+  background: transparent;
+  color: white;
+  padding: 0;
+  padding: 2px;
+  padding-left: 0;
+  transition: 0.3s;
+}
+
+.select-column:focus {
+  background: rgb(20, 20, 20);
+  border-color: var(--yellow);
+}
+
+.filter-btn {
+  padding: 10px;
+  font-weight: 500;
+  color: var(--yellow);
+  background-color: transparent;
+  border: 2px solid var(--yellow);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  background-color:rgba(250, 230, 10, 0.1);
+  transition: 0.2s;
+}
+
+.filter-btn:active {
+  filter: brightness(70%);
+}
+
+.active-filter-paragraph span {
+  position: absolute;
+  right: -25px;
+  top: -2px;
+  cursor: pointer;
+}
+
+.active-filters-container {
+  color: red;
+  font-size: 12px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.active-filter-paragraph {
+  position: relative;
 }

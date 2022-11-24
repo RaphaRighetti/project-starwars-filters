@@ -5,7 +5,13 @@ export const AppContext = createContext();
 
 export default function AppProvider({ children }) {
   const [planets, setPlanets] = useState([]);
+  const [filteredPlanets, setFilteredPlanets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [nameInput, setNameInput] = useState('');
+  const [columnSelect, setColumnSelect] = useState('population');
+  const [operatorSelect, setOperatorSelect] = useState('maior que');
+  const [numInput, setNumInput] = useState('0');
+  const [activeFilters, setActiveFilters] = useState([]);
   const fetchPlanets = async () => {
     try {
       const response = await fetch('https://swapi.dev/api/planets');
@@ -20,6 +26,7 @@ export default function AppProvider({ children }) {
       newData.results.forEach((e) => {
         delete e.residents;
       });
+      setFilteredPlanets(newData);
       setPlanets(newData);
       setLoading(false);
     } catch (err) {
@@ -31,7 +38,24 @@ export default function AppProvider({ children }) {
     fetchPlanets();
   }, []);
   return (
-    <AppContext.Provider value={ { planets, loading } }>
+    <AppContext.Provider
+      value={ {
+        planets,
+        loading,
+        filteredPlanets,
+        setFilteredPlanets,
+        nameInput,
+        setNameInput,
+        columnSelect,
+        setColumnSelect,
+        operatorSelect,
+        setOperatorSelect,
+        numInput,
+        setNumInput,
+        activeFilters,
+        setActiveFilters,
+      } }
+    >
       {children}
     </AppContext.Provider>
   );
