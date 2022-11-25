@@ -3,6 +3,7 @@ import { AppContext } from '../context/AppProvider';
 
 export default function NumFilter() {
   const {
+    loading,
     columnSelect,
     setColumnSelect,
     operatorSelect,
@@ -44,11 +45,16 @@ export default function NumFilter() {
           value={ columnSelect }
           onChange={ ({ target }) => setColumnSelect(target.value) }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          {activeFilters.some((e) => e.column === 'population')
+          || (<option value="population">population</option>)}
+          {activeFilters.some((e) => e.column === 'orbital_period')
+          || (<option value="orbital_period">orbital_period</option>)}
+          {activeFilters.some((e) => e.column === 'diameter')
+          || (<option value="diameter">diameter</option>)}
+          {activeFilters.some((e) => e.column === 'rotation_period')
+          || (<option value="rotation_period">rotation_period</option>)}
+          {activeFilters.some((e) => e.column === 'surface_water')
+          || (<option value="surface_water">surface_water</option>)}
         </select>
       </label>
       <label htmlFor="select-operator-id" className="select-label">
@@ -83,6 +89,7 @@ export default function NumFilter() {
         className="filter-btn"
         data-testid="button-filter"
         onClick={ filterPlanet }
+        disabled={ loading }
       >
         Filtrar
       </button>
