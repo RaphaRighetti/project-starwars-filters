@@ -5,14 +5,27 @@ export default function OrderContent() {
   const { orderColumn, setOrderColumn,
     planets, filteredPlanets, setFilteredPlanets, setActiveFilters,
     columnSelect, setColumnSelect, radioValue,
-    setRadioValue, setOrderRules } = useContext(AppContext);
+    setRadioValue, orderRules, setOrderRules } = useContext(AppContext);
 
   const removeAll = () => {
     setActiveFilters([]);
-    setFilteredPlanets({ ...planets, results: [...planets.results] });
     if (columnSelect === '') {
       setColumnSelect('population');
     }
+    const newPlanets = { ...planets, results: [...planets.results] };
+    if (orderRules.isOrdered) {
+      const nextPosition = 1;
+      const prevPosition = -1;
+      newPlanets.results.sort((a, b) => {
+        if (a[orderRules.column] === 'unknown') return nextPosition;
+        if (b[orderRules.column] === 'unknown') return prevPosition;
+        if (orderRules.sort === 'ASC') {
+          return parseFloat(a[orderRules.column]) - parseFloat(b[orderRules.column]);
+        }
+        return parseFloat(b[orderRules.column]) - parseFloat(a[orderRules.column]);
+      });
+    }
+    setFilteredPlanets(newPlanets);
   };
 
   const orderPlanets = () => {
@@ -30,10 +43,7 @@ export default function OrderContent() {
       if (newOrderRules.sort === 'ASC') {
         return parseFloat(a[newOrderRules.column]) - parseFloat(b[newOrderRules.column]);
       }
-      if (newOrderRules.sort === 'DESC') {
-        return parseFloat(b[newOrderRules.column]) - parseFloat(a[newOrderRules.column]);
-      }
-      return 0;
+      return parseFloat(b[newOrderRules.column]) - parseFloat(a[newOrderRules.column]);
     });
     setFilteredPlanets({
       ...filteredPlanets,

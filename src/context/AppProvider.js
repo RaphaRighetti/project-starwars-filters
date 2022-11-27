@@ -17,6 +17,7 @@ export default function AppProvider({ children }) {
   const [orderRules, setOrderRules] = useState({
     isOrdered: false,
     column: '',
+    sort: '',
   });
   const fetchPlanets = async () => {
     try {

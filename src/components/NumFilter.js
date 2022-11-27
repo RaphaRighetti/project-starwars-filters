@@ -48,10 +48,7 @@ export default function NumFilter() {
         if (orderRules.sort === 'ASC') {
           return parseFloat(a[orderRules.column]) - parseFloat(b[orderRules.column]);
         }
-        if (orderRules.sort === 'DESC') {
-          return parseFloat(b[orderRules.column]) - parseFloat(a[orderRules.column]);
-        }
-        return 0;
+        return parseFloat(b[orderRules.column]) - parseFloat(a[orderRules.column]);
       });
     }
   };
@@ -61,8 +58,7 @@ export default function NumFilter() {
       const num = numInput === '' ? 0 : parseFloat(numInput);
       if (operatorSelect === 'maior que') return parseFloat(e[columnSelect]) > num;
       if (operatorSelect === 'menor que') return parseFloat(e[columnSelect]) < num;
-      if (operatorSelect === 'igual a') return parseFloat(e[columnSelect]) === num;
-      return true;
+      return parseFloat(e[columnSelect]) === num;
     });
     sortPlanets(newPlanets);
     setFilteredPlanets({

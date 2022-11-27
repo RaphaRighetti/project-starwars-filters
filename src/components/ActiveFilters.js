@@ -24,10 +24,7 @@ export default function ActiveFilters() {
         if (orderRules.sort === 'ASC') {
           return parseFloat(a[orderRules.column]) - parseFloat(b[orderRules.column]);
         }
-        if (orderRules.sort === 'DESC') {
-          return parseFloat(b[orderRules.column]) - parseFloat(a[orderRules.column]);
-        }
-        return 0;
+        return parseFloat(b[orderRules.column]) - parseFloat(a[orderRules.column]);
       });
     }
   };
@@ -46,8 +43,7 @@ export default function ActiveFilters() {
         const num = element.number === '' ? 0 : parseFloat(element.number);
         if (element.operator === 'maior que') return parseFloat(e[element.column]) > num;
         if (element.operator === 'menor que') return parseFloat(e[element.column]) < num;
-        if (element.operator === 'igual a') return parseFloat(e[element.column]) === num;
-        return true;
+        return parseFloat(e[element.column]) === num;
       });
     });
     sortPlanets(newPlanets.results);
