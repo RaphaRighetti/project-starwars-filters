@@ -11,7 +11,10 @@ export default function HomeContent() {
     .map((e) => (
       <tr key={ e.name }>
         {planetKeys.map((keys) => (
-          <td key={ `${e.name}-${keys}` }>
+          <td
+            key={ `${e.name}-${keys}` }
+            data-testid={ keys === 'name' && 'planet-name' }
+          >
             {Array.isArray(e[keys]) ? (e[keys].map((link) => (
               <p key={ link }>{link}</p>
             ))) : e[keys] }

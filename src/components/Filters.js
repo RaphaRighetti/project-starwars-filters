@@ -3,6 +3,7 @@ import { AppContext } from '../context/AppProvider';
 import ActiveFilters from './ActiveFilters';
 import Lupa from './Lupa';
 import NumFilter from './NumFilter';
+import OrderContent from './OrderContent';
 
 export default function Filters() {
   const { nameInput, setNameInput } = useContext(AppContext);
@@ -25,6 +26,7 @@ export default function Filters() {
       </div>
       <div className="number-order-container">
         <NumFilter />
+        <OrderContent />
       </div>
       <ActiveFilters />
     </div>

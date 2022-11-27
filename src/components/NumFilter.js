@@ -13,7 +13,48 @@ export default function NumFilter() {
     filteredPlanets,
     setFilteredPlanets,
     activeFilters,
-    setActiveFilters } = useContext(AppContext);
+    setActiveFilters,
+    orderRules } = useContext(AppContext);
+
+  const maxFilters = 5;
+
+  const handleColumn = (updateActiveFilters) => {
+    const columnValues = [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water'];
+
+    if (updateActiveFilters.length >= maxFilters) {
+      setColumnSelect('');
+    } else {
+      for (let i = 0; i < columnValues.length; i += 1) {
+        if (!updateActiveFilters.some((filters) => filters.column === columnValues[i])) {
+          setColumnSelect(columnValues[i]);
+          break;
+        }
+      }
+    }
+  };
+
+  const sortPlanets = (arr) => {
+    if (orderRules.isOrdered) {
+      const nextPosition = 1;
+      const prevPosition = -1;
+      arr.sort((a, b) => {
+        if (a[orderRules.column] === 'unknown') return nextPosition;
+        if (b[orderRules.column] === 'unknown') return prevPosition;
+        if (orderRules.sort === 'ASC') {
+          return parseFloat(a[orderRules.column]) - parseFloat(b[orderRules.column]);
+        }
+        if (orderRules.sort === 'DESC') {
+          return parseFloat(b[orderRules.column]) - parseFloat(a[orderRules.column]);
+        }
+        return 0;
+      });
+    }
+  };
 
   const filterPlanet = () => {
     const newPlanets = filteredPlanets.results.filter((e) => {
@@ -23,6 +64,7 @@ export default function NumFilter() {
       if (operatorSelect === 'igual a') return parseFloat(e[columnSelect]) === num;
       return true;
     });
+    sortPlanets(newPlanets);
     setFilteredPlanets({
       ...filteredPlanets,
       results: newPlanets,
@@ -32,6 +74,12 @@ export default function NumFilter() {
       operator: operatorSelect,
       number: numInput,
     }]);
+    const updateActiveFilters = [...activeFilters, {
+      column: columnSelect,
+      operator: operatorSelect,
+      number: numInput,
+    }];
+    handleColumn(updateActiveFilters);
   };
 
   return (
@@ -89,7 +137,7 @@ export default function NumFilter() {
         className="filter-btn"
         data-testid="button-filter"
         onClick={ filterPlanet }
-        disabled={ loading }
+        disabled={ loading || activeFilters.length >= maxFilters }
       >
         Filtrar
       </button>

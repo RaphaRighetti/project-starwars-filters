@@ -12,6 +12,12 @@ export default function AppProvider({ children }) {
   const [operatorSelect, setOperatorSelect] = useState('maior que');
   const [numInput, setNumInput] = useState('0');
   const [activeFilters, setActiveFilters] = useState([]);
+  const [orderColumn, setOrderColumn] = useState('population');
+  const [radioValue, setRadioValue] = useState('');
+  const [orderRules, setOrderRules] = useState({
+    isOrdered: false,
+    column: '',
+  });
   const fetchPlanets = async () => {
     try {
       const response = await fetch('https://swapi.dev/api/planets');
@@ -54,6 +60,12 @@ export default function AppProvider({ children }) {
         setNumInput,
         activeFilters,
         setActiveFilters,
+        orderColumn,
+        setOrderColumn,
+        radioValue,
+        setRadioValue,
+        orderRules,
+        setOrderRules,
       } }
     >
       {children}

@@ -68,7 +68,7 @@ header {
 .table-container {
   overflow-x: auto;
   overflow-y: auto;
-  max-height: 250px;
+  max-height: 220px;
 }
 
 table {
@@ -175,7 +175,7 @@ tr td {
 .number-order-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 40px;
 }
 
 .number-filter-container {
@@ -193,6 +193,7 @@ tr td {
   position: relative;
   align-self: flex-end;
   width: fit-content;
+  height: fit-content;
   width: 50%;
   max-width: 100px;
   min-width: 50px;
@@ -241,11 +242,14 @@ tr td {
   filter: brightness(70%);
 }
 
-.active-filter-paragraph span {
+.btn-delete{
   position: absolute;
   right: -25px;
   top: -2px;
   cursor: pointer;
+  color: red;
+  border: none;
+  background-color: transparent;
 }
 
 .active-filters-container {
@@ -259,4 +263,37 @@ tr td {
 
 .active-filter-paragraph {
   position: relative;
+}
+
+.order-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+
+}
+
+.radio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.radio-label {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.radio-label:nth-of-type(1) {
+  margin-top: 4px;
+}
+
+.radio-label:nth-of-type(2) {
+  margin-top: 10px;
+}
+
+.radio-input {
+  margin: 0 5px 0;
+  position: relative;
+  filter: hue-rotate(50deg);
 }
